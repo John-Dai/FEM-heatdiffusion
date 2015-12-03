@@ -1,0 +1,7 @@
+biquadratic
+neumann
+forcing term
+therm constant changes bigk but doesn't 
+proposal
+patch test
+convergence testing
