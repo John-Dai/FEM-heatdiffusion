@@ -2,10 +2,10 @@ function [ke] = biquadraticelemstiff(node,x,y,gauss,therm,e);
 
 % 2d QUAD element stiffness routine
 
-ke = zeros(18,18);
+ke = zeros(9,9);
 
 % plane stress D matrix
-D = therm*[1,0,0;0,1,0;0,0,1]; %wikipedia aluminium
+D = therm*[1,0;0,1]; %wikipedia aluminium
       
 % !!!!!get coordinates of element nodes 
 for j=1:9
@@ -45,9 +45,11 @@ for i=1:2
       NJdpsieta = [NJpsi; NJeta];
       NJdxy = Jinv*NJdpsieta./jcob;
       % assemble B matrix
-      BJ = zeros(3,18);
-      BJ(1,1:2:17) = NJdxy(1,1:9);  BJ(2,2:2:18) = NJdxy(2,1:9);
-      BJ(3,1:2:17) = NJdxy(2,1:9);  BJ(3,2:2:18) = NJdxy(1,1:9);
+%       BJ = zeros(3,18);
+%       BJ(1,1:2:17) = NJdxy(1,1:9);  BJ(2,2:2:18) = NJdxy(2,1:9);
+%       BJ(3,1:2:17) = NJdxy(2,1:9);  BJ(3,2:2:18) = NJdxy(1,1:9);
+      BJ = zeros(2,9);
+      BJ(1,1:9) = NJdxy(1,1:9);  BJ(2,1:9) = NJdxy(2,1:9);
       % assemble ke
       ke = ke + BJ'*D*BJ.*jcob;
    end

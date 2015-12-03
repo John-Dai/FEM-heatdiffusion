@@ -2,12 +2,12 @@ function [ke] = elemstiff(node,x,y,gauss,therm,e);
 
 % 2d QUAD element stiffness routine
 
-ke = zeros(8,8);
+ke = zeros(4,4);
 one = ones(1,4);
 psiJ = [-1, +1, +1, -1]; etaJ = [-1, -1, +1, +1];
 
 % plane stress D matrix
-D = therm*[1,0,0;0,1,0;0,0,1]; %wikipedia aluminium
+D = therm*[1,0,;0,1]; %wikipedia aluminium
 % fac = young(e)/(1 - (pr(e))^2);
 % D = fac*[1.0, pr(e), 0;
 %          pr(e), 1.0, 0.0;
@@ -35,9 +35,8 @@ for i=1:2
       NJdpsieta = [NJpsi; NJeta];
       NJdxy = Jinv*NJdpsieta./jcob;
       % assemble B matrix
-      BJ = zeros(3,8);
-      BJ(1,1:2:7) = NJdxy(1,1:4);  BJ(2,2:2:8) = NJdxy(2,1:4);
-      BJ(3,1:2:7) = NJdxy(2,1:4);  BJ(3,2:2:8) = NJdxy(1,1:4);
+      BJ = zeros(2,4);
+      BJ(1,1:4) = NJdxy(1,1:4);  BJ(2,1:4) = NJdxy(2,1:4);
       % assemble ke
       ke = ke + BJ'*D*BJ*jcob;
    end

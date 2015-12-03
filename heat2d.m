@@ -13,7 +13,7 @@ therm=204;
 [force]=applyflux(iforce,x,y,numnod,length,height);
 
 %ASSEMBLY OF STIFFNESS
-ndof = 2; %degrees of freedom per node
+ndof = 1; %degrees of freedom per node
 gauss = [-3^(-0.5), 3^(-0.5)];
 numeqns = numnod*ndof;
 bigk = zeros(numeqns);
@@ -60,15 +60,15 @@ end
 rank(bigk)
 disp = force/bigk;
 
-disp(2*numnod)
+disp(numnod)
 
-xx=linspace(1,numeqns,numeqns);
-for i=1:numnod
-    dispp(i)=disp(i*2-0);
-end
+% xx=linspace(1,numeqns,numeqns);
+% for i=1:numnod
+%     dispp(i)=disp(i*2-0);
+% end
 %plot(x,dispp)
 figure(2)
-scatter3(x,y,dispp)
+scatter3(x,y,disp)
 
 %compute stresses at center of each element
 % gauss = [0, 0];
