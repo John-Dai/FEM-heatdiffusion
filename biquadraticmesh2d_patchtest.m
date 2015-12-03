@@ -3,8 +3,8 @@
 function[x,y,node,numele,numnod] = biquadraticmesh2d_patchtest(length,height)
 
 % number of elements in each direction
-ndivl = 1;
-ndivw = 1;
+ndivl = 3;
+ndivw = 3;
 
 numele = ndivw*ndivl;
 numnod = (ndivl+2)*(ndivw+2);

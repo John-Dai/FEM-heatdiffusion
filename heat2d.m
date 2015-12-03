@@ -3,13 +3,13 @@ clear
 %INPUT DATA
 length = 1;
 height = 1;
-[x,y,node,numele,numnod] = biquadraticmesh2d(length,height);
+[x,y,node,numele,numnod] = biquadraticmesh2d_patchtest(length,height);
 
 %MATERIAL CONSTANTS
 therm=204;
 
 %FORCE AND DISPLACEMENT BC'S
-[iforce,ifix,gammag] = applybcs(x,y,numnod,length,height);
+[iforce,ifix,gammag] = applybcs_patchtest_linear(x,y,numnod,length,height);
 [force]=applyflux(iforce,x,y,numnod,length,height);
 
 %ASSEMBLY OF STIFFNESS
