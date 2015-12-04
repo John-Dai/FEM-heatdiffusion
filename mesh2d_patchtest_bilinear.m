@@ -1,6 +1,6 @@
 % 9 ELEMENT BILINEAR MESH GENERATION PROGRAM FOR 2D BEAM IN BENDING
 
-function[x,y,node,numele,numnod] = mesh2d_patchtest(length,height)
+function[x,y,node,numele,numnod] = mesh2d_patchtest_bilinear(length,height)
 
 % number of elements in each direction
 ndivl = 3;

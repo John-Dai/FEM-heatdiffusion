@@ -9,7 +9,7 @@ height = 1;
 therm=1;
 
 %FORCE AND DISPLACEMENT BC'S
-[force,ifix] = applybcs_d00siny0(x,y,numnod,length,height);
+[force,ifix] = applybcs_complex(x,y,numnod,length,height);
 
 %ASSEMBLY OF STIFFNESS
 ndof = 1; %degrees of freedom per node
@@ -52,12 +52,12 @@ for n=1:numnod
 end
 
 %solve stiffness equations
-rank(bigk)
-disp = force/bigk;
+rank(bigk);
+temperature = force/bigk;
 
-disp(numnod)
+temperature(numnod)
 figure(2)
-scatter3(x,y,disp)
+scatter3(x,y,temperature)
 
 %analytic equation
 solution=zeros(1,numnod);
@@ -65,11 +65,13 @@ for n=1:numnod
     solution(n)=evaluateheat(x(n),y(n),length,height);
 end
 figure(3)
+%hold on
 scatter3(x,y,solution)
+%legend('FEA approximation', 'Underlying Dirichelet paraboloid')
 
-l2norm=0
+l2norm=0;
 for n=1:numnod
-    l2norm=l2norm+(solution(n)-disp(n))^2;
+    l2norm=l2norm+(solution(n)-temperature(n))^2;
 end
 l2norm=sqrt(l2norm)
 

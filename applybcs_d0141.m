@@ -18,8 +18,20 @@ for i=1:numnod
    end
    if (y(i) == -height/2)
        force(i) = 1;
+              if (x(i)==0)
+           force(i)=0.5;
+       end
+       if (x(i)==length)
+           force(i)=2.5;
+       end
    end
    if (y(i)==-height/2+height)
        force(i) = 1;
+              if (x(i)==0)
+           force(i)=0.5;
+       end
+       if (x(i)==length)
+           force(i)=2.5;
+       end
    end
 end
