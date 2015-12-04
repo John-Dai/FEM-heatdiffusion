@@ -1,17 +1,14 @@
-% MESH GENERATION PROGRAM FOR 2D BEAM IN BENDING
+% BILINEAR MESH GENERATION PROGRAM FOR 2D BEAM IN BENDING
 
-function[x,y,node,numele,numnod] = mesh2d(length,height)
+function[x,y,node,numele,numnod] = mesh2d_bilinear(length,height)
 
 % number of elements in each direction
 ndivl = 24;
 ndivw = 24;
-
 numele = ndivw*ndivl;
 numnod = (ndivl+1)*(ndivw+1);
 
-
 % set up nodal coordinates
-
 for i = 1:(ndivl+1)
    for j=1:(ndivw+1)
       x((ndivw+1)*(i-1)+j) = (length/ndivl)*(i-1);
@@ -20,7 +17,6 @@ for i = 1:(ndivl+1)
 end
 
 % set up connectivity array
-
 for j=1:ndivl
    for i=1:ndivw
       elemn = (j-1)*ndivw + i;

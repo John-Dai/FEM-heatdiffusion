@@ -1,17 +1,13 @@
-function [ke] = elemstiff(node,x,y,gauss,therm,e);
+% 2d QUAD bilinear element stiffness routine
 
-% 2d QUAD element stiffness routine
+function [ke] = elemstiff_bilinear(node,x,y,gauss,therm,e);
 
 ke = zeros(4,4);
 one = ones(1,4);
 psiJ = [-1, +1, +1, -1]; etaJ = [-1, -1, +1, +1];
 
-% plane stress D matrix
+% plane conductivity D matrix
 D = therm*[1,0,;0,1]; %wikipedia aluminium
-% fac = young(e)/(1 - (pr(e))^2);
-% D = fac*[1.0, pr(e), 0;
-%          pr(e), 1.0, 0.0;
-%          0, 0, (1.-pr(e))/2 ];
       
 % get coordinates of element nodes 
 for j=1:4

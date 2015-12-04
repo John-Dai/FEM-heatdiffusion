@@ -1,16 +1,14 @@
-% BIQUADRATIC MESH GENERATION PROGRAM FOR 2D HEAT
+% 9 ELEMENT BIQUADRATIC MESH GENERATION PROGRAM FOR 2D HEAT
 
-function[x,y,node,numele,numnod] = biquadraticmesh2d_patchtest(length,height)
+function[x,y,node,numele,numnod] = mesh2d_patchtest_biquadratic(length,height)
 
 % number of elements in each direction
 ndivl = 3;
 ndivw = 3;
-
 numele = ndivw*ndivl;
 numnod = (ndivl+2)*(ndivw+2);
 
 % set up nodal coordinates
-
 for i = 1:(ndivl+2)
    for j=1:(ndivw+2)
       x((ndivw+2)*(i-1)+j) = (length/(ndivl+1))*(i-1);
@@ -19,7 +17,6 @@ for i = 1:(ndivl+2)
 end
 
 % set up connectivity array
-
 for j=1:ndivl
    for i=1:ndivw
       elemn = (j-1)*ndivw + i;
