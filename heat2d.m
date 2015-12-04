@@ -3,13 +3,13 @@ clear
 %INPUT DATA
 length = 1;
 height = 1;
-[x,y,node,numele,numnod] = biquadraticmesh2d_patchtest(length,height);
+[x,y,node,numele,numnod] = mesh2d_biquadratic(length,height);
 
 %MATERIAL CONSTANTS
-therm=204;
+therm=1;
 
 %FORCE AND DISPLACEMENT BC'S
-[iforce,ifix] = applybcs_patchtest_linear(x,y,numnod,length,height);
+[force,ifix] = applybcs_d00siny0(x,y,numnod,length,height);
 
 %ASSEMBLY OF STIFFNESS
 ndof = 1; %degrees of freedom per node
@@ -23,7 +23,7 @@ bigk = zeros(numeqns);
 % nlink is # of nodes per element
 nlink = 9;
 for e = 1:numele
-   [ke] = biquadraticelemstiff(node,x,y,gauss,therm,e);
+   [ke] = elemstiff_biquadratic(node,x,y,gauss,therm,e);
    %
    % assemble ke into bigk
    %
@@ -59,5 +59,17 @@ disp(numnod)
 figure(2)
 scatter3(x,y,disp)
 
+%analytic equation
+solution=zeros(1,numnod);
+for n=1:numnod
+    solution(n)=evaluateheat(x(n),y(n),length,height);
+end
+figure(3)
+scatter3(x,y,solution)
 
+l2norm=0
+for n=1:numnod
+    l2norm=l2norm+(solution(n)-disp(n))^2;
+end
+l2norm=sqrt(l2norm)
 

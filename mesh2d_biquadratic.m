@@ -3,8 +3,8 @@
 function[x,y,node,numele,numnod] = mesh2d_biquadratic(length,height)
 
 % number of elements in each direction
-ndivl = 10;
-ndivw = 10;
+ndivl = 12;
+ndivw = 12;
 numele = ndivw*ndivl;
 numnod = (2*ndivl+1)*(2*ndivw+1);
 
